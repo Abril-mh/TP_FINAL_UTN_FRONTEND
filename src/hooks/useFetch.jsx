@@ -1,39 +1,32 @@
-import { useState } from "react"
+import { useState } from "react";
 
 const useFetch = () => {
-    const [response, setResponse] = useState(null)
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(null)
+    const [response, setResponse] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    
+async function sendRequest(requestCallback) {
+    setError(null);
+    setLoading(true);
 
-    async function sendRequest ( requestCallback ) {
-        setError(null)
-        setLoading(true)
-        try{
-            const response = await requestCallback()
-            if(!response.ok){
-                throw new Error(response.message || 'Error desconocido')
-            }
-            setResponse(response)
-        }
-        catch(error){
-            setError(error.message)
-        }
-        finally{
-            setLoading(false)
-        }
-    }
+    try {
+        const data = await requestCallback();
 
-    function resetResponse () {
-        setResponse(null)
-    }
+        if (data.ok === false) throw new Error(data.message || "Error desconocido");
 
-    return {
-        response,
-        loading,
-        error,
-        sendRequest,
-        resetResponse
+        setResponse(data);
+    } catch (err) {
+        setError(err.message);
+    } finally {
+        setLoading(false);
     }
 }
 
-export default useFetch
+    function resetResponse() {
+        setResponse(null);
+    }
+
+    return { response, loading, error, sendRequest, resetResponse };
+};
+
+export default useFetch;

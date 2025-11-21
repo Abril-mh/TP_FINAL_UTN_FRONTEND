@@ -1,67 +1,32 @@
 import ENVIRONMENT from "../config/environment"
 
-export async function register (username, email, password){
+export async function register(name, email, password) {
+    const body = { name, email, password }
 
-    try{
-        const body = {
-            name: username, 
-            email,
-            password
+    const response_http = await fetch(
+        ENVIRONMENT.URL_API + "/api/auth/register",
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
         }
-    
-    
-        //Fetch es una funcion nativa de JS para hacer consultas HTTP
-        const response_http = await fetch(
-            ENVIRONMENT.URL_API +  '/api/auth/register',
-            {
-                method: 'POST',
-                headers: {
-                    //Indica a mi servidor que voy a enviar un JSON por body
-                    "Content-Type": 'application/json'
-                },
-                //Transformo el objeto de JS a JSON (texto)
-                body: JSON.stringify(body)
-            }
-        )
-        //Transformamos el body de respuesta de JSON a objeto de JS 
-        const response = await response_http.json()
-    
-        return response
-    }
-    catch(error){
-        console.error('Error al registrar:', error)
-        throw new Error('Error interno del servidor')
-    }
+    )
+
+    return await response_http.json()
 }
 
-export async function login (email, password){
-    try{
-        const body = {
-            email, 
-            password
-        } 
-    
-        const response_http = await fetch(
-                ENVIRONMENT.URL_API + '/api/auth/login',
-            {
-                method: 'POST',
-                headers: {
-                    //Indica a mi servidor que voy a enviar un JSON por body
-                    "Content-Type": 'application/json'
-                },
-                //Transformo el objeto de JS a JSON (texto)
-                body: JSON.stringify(body)
-            }
-        )
-        
-        const response = await response_http.json()
-    
-        return response
+export async function login(email, password) {
+    const body = { email, password }
 
-    }
-    
-    catch(error){
-        console.error('Error al registrar:', error)
-        throw new Error('Error interno del servidor')
-    }
+    const response_http = await fetch(
+        ENVIRONMENT.URL_API + "/api/auth/login",
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        }
+    )
+
+    return await response_http.json()
 }
+

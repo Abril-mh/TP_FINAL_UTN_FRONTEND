@@ -1,5 +1,5 @@
-const ENVIRONMENT= {
-    URL_API: import.meta.env.VITE_APP_API_URL
+const ENVIRONMENT = {
+    URL_API: import.meta.env.VITE_API_URL
 }
 
 export default ENVIRONMENT

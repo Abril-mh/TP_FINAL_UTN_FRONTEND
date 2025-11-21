@@ -1,48 +1,29 @@
-import React, { useEffect } from 'react'
-import useFetch from '../../hooks/useFetch'
-import { getWorkspaces } from '../../services/workspaceService'
-import { Link } from 'react-router'
-
+import { useEffect } from "react";
+import useFetch from "../../hooks/useFetch";
+import { getTasks } from "../../services/TaskService.js";
 
 const HomeScreen = () => {
+    const { sendRequest, response, loading } = useFetch();
 
-    const { sendRequest, response, loading, error } = useFetch()
+    useEffect(() => {
+        sendRequest(() => getTasks());
+    }, []);
 
-    useEffect(
-        () => {
-            sendRequest(
-                () => getWorkspaces()
-            )
-        },
-        []
-    )
-
-    console.log(response, loading, error)
     return (
         <div>
-            <h1>Lista de espacios de trabajo</h1>
-            {
-                loading
-                    ? <span>Cargando...</span>
-                    : <div>
-                        {
-                            response
-                            &&
-                            response.data.workspaces.map(
-                                (workspace) => {
-                                    return (
-                                        <div>
-                                            <h2>{workspace.workspace_name}</h2>
-                                            <Link to={'/workspace/' + workspace.workspace_id}>Abrir workspace</Link>
-                                        </div>
-                                    )
-                                }
-                            )
-                        }
+            <h1>Tareas</h1>
+            {loading ? (
+                <p>Cargando...</p>
+            ) : (
+                response?.data?.tasks?.map(task => (
+                    <div key={task._id}>
+                        <h3>{task.title}</h3>
+                        <p>{task.description}</p>
                     </div>
-            }
+                ))
+            )}
         </div>
-    )
-}
+    );
+};
 
-export default HomeScreen
+export default HomeScreen;
