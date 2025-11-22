@@ -4,8 +4,10 @@ const useForm = (initial_state, onSubmit) => {
     const [form_state, setFormState] = useState(initial_state);
 
     function onInputChange(e) {
-        const { name, value } = e.target;
-        setFormState(prev => ({ ...prev, [name]: value }));
+        setFormState(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }));
     }
 
     function handleSubmit(e) {
