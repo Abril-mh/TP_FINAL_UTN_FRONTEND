@@ -7,10 +7,10 @@ export const AuthContext = createContext();
 const AuthContextProvider = ({ children }) => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
-    const [isLogged, setIsLogged] = useState(Boolean(localStorage.getItem('auth_token')));
+    const [isLogged, setIsLogged] = useState(Boolean(localStorage.getItem("auth_token")));
 
     useEffect(() => {
-        const token = localStorage.getItem('auth_token');
+        const token = localStorage.getItem("auth_token");
 
         if (!token) {
             setIsLogged(false);
@@ -19,27 +19,28 @@ const AuthContextProvider = ({ children }) => {
         }
 
         const decoded = decodeToken(token);
+
         if (decoded) {
             setUser(decoded);
             setIsLogged(true);
         } else {
-            setIsLogged(false);
             setUser(null);
+            setIsLogged(false);
         }
     }, []);
 
-    function onLogout() {
-        localStorage.removeItem('auth_token');
-        setIsLogged(false);
-        setUser(null);
-        navigate('/login');
+    function onLogin(token) {
+        localStorage.setItem("auth_token", token);
+        setIsLogged(true);
+        setUser(decodeToken(token));
+        navigate("/home");
     }
 
-    function onLogin(auth_token) {
-        localStorage.setItem('auth_token', auth_token);
-        setIsLogged(true);
-        setUser(decodeToken(auth_token));
-        navigate('/home');
+    function onLogout() {
+        localStorage.removeItem("auth_token");
+        setUser(null);
+        setIsLogged(false);
+        navigate("/login");
     }
 
     return (
@@ -50,3 +51,4 @@ const AuthContextProvider = ({ children }) => {
 };
 
 export default AuthContextProvider;
+
