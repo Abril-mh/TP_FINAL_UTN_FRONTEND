@@ -10,22 +10,19 @@ const LoginScreen = () => {
     const location = useLocation();
 
     useEffect(() => {
-        const query = new URLSearchParams(location.search);
-        if (query.get("from") === "verified_email") {
+        if (new URLSearchParams(location.search).get("from") === "verified_email") {
             alert("Correo verificado correctamente");
         }
     }, []);
 
-    const initial = { email: "", password: "" };
+    const { response, error, loading, sendRequest } = useFetch();
 
-    const { response, error, loading, sendRequest, resetResponse } = useFetch();
+    const initial = { email: "", password: "" };
+    const { form_state, onInputChange, handleSubmit } = useForm(initial, handleLogin);
 
     function handleLogin(form) {
-        resetResponse();
         sendRequest(() => login(form.email, form.password));
     }
-
-    const { form_state, onInputChange, handleSubmit } = useForm(initial, handleLogin);
 
     useEffect(() => {
         if (response?.ok) {
@@ -36,17 +33,18 @@ const LoginScreen = () => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <label>Email</label>
                 <input name="email" value={form_state.email} onChange={onInputChange} />
-
-                <label>Password</label>
                 <input name="password" value={form_state.password} onChange={onInputChange} />
 
                 {error && <p>{error}</p>}
-                {loading ? <button disabled>Entrando...</button> : <button>Login</button>}
+
+                <button disabled={loading}>
+                    {loading ? "Entrando..." : "Login"}
+                </button>
             </form>
         </div>
     );
 };
 
 export default LoginScreen;
+
