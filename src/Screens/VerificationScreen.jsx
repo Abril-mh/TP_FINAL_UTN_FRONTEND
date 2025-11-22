@@ -10,12 +10,12 @@ export const VerificationScreen = () => {
         async function verify() {
             try {
                 const res = await fetch(
-                    `${ENVIRONMENT.URL_API}/api/auth/verify/${token}`
+                    `${ENVIRONMENT.URL_API}/api/auth/verify?token=${token}`
                 );
 
                 const data = await res.json();
 
-                if (data.ok) {
+                if (data.message === "Cuenta verificada") {
                     alert("¡Correo verificado correctamente!");
                     navigate("/login?from=verified_email");
                 } else {
