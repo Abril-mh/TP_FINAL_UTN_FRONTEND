@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import ENVIRONMENT from "../config/environment";
 
 export const VerificationScreen = () => {
@@ -7,7 +7,7 @@ export const VerificationScreen = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        async function verify() {
+        const verify = async () => {
             try {
                 const res = await fetch(
                     `${ENVIRONMENT.URL_API}/api/auth/verify?token=${token}`
@@ -15,20 +15,22 @@ export const VerificationScreen = () => {
 
                 const data = await res.json();
 
-                if (data.message === "Cuenta verificada") {
-                    alert("¡Correo verificado correctamente!");
-                    navigate("/login?from=verified_email");
-                } else {
-                    alert("Error al verificar el correo.");
+                // Validación correcta
+                if (!res.ok) {
+                    alert(data.message || "Error al verificar el correo.");
+                    return;
                 }
+
+                alert("¡Correo verificado correctamente!");
+                navigate("/login?from=verified_email");
             } catch (err) {
                 console.error(err);
                 alert("Error al conectar con el servidor.");
             }
-        }
+        };
 
         verify();
-    }, []);
+    }, [token, navigate]);
 
     return <h1>Verificando correo...</h1>;
 };
