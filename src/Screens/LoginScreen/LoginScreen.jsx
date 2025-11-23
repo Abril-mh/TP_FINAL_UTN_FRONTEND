@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { useLocation } from "react-router";
+import { useLocation } from "react-router-dom";
 import { login } from "../../services/authService";
 import useForm from "../../hooks/useForm";
 import useFetch from "../../hooks/useFetch";
