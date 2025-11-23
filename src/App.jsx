@@ -9,11 +9,9 @@ function App() {
     return (
         <Routes>
             <Route path="/verify_email/:token" element={<VerificationScreen />} />
-
             <Route path="/" element={<LoginScreen />} />
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/register" element={<RegisterScreen />} />
-
             <Route element={<AuthMiddleware />}>
                 <Route path="/home" element={<HomeScreen />} />
             </Route>

@@ -35,9 +35,7 @@ const LoginScreen = () => {
             <form onSubmit={handleSubmit}>
                 <input name="email" value={form_state.email} onChange={onInputChange} />
                 <input name="password" value={form_state.password} onChange={onInputChange} />
-
                 {error && <p>{error}</p>}
-
                 <button disabled={loading}>
                     {loading ? "Entrando..." : "Login"}
                 </button>

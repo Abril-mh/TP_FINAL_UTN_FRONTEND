@@ -12,9 +12,7 @@ const HomeScreen = () => {
     return (
         <div>
             <h1>Tareas</h1>
-
             {loading && <p>Cargando...</p>}
-
             {response?.data?.tasks?.map(task => (
                 <div key={task._id}>
                     <h3>{task.title}</h3>
