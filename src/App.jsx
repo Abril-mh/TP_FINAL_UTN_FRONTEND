@@ -4,7 +4,7 @@ import RegisterScreen from "./Screens/RegisterScreen/RegisterScreen";
 import HomeScreen from "./Screens/HomeScreen/HomeScreen";
 import AuthMiddleware from "./Middleware/AuthMiddleware";
 import { VerificationScreen } from "./Screens/VerificationScreen";
-import CreateTaskScreen from "./Screens/CreatetaskScreen/CreateTaskScreen";
+import CreateTaskScreen from "./Screens/CreatetaskScreen/CreateTaskScreen.jsx";
 import EditTaskScreen from "./Screens/EditTaskScreen/EditTaskScreen";
 import TaskDetailScreen from "./Screens/TaskDetailScreen/TaskDetailScreen";
 import CategoriesScreen from "./Screens/CategoriesScreen/CategoriesScreen";
