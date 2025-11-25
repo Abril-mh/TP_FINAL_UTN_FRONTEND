@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { login } from "../../services/authService";
-import useForm from "../../hooks/useForm";
-import useFetch from "../../hooks/useFetch";
-import { AuthContext } from "../../Context/AuthContext";
+import { login } from "../../services/authService.js";
+import useForm from "../../hooks/useForm.jsx";
+import useFetch from "../../hooks/useFetch.jsx";
+import { AuthContext } from "../../Context/AuthContext.jsx";
 
 const LoginScreen = () => {
     const { onLogin } = useContext(AuthContext);

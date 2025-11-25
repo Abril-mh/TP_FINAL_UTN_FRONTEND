@@ -1,4 +1,4 @@
-import ENVIRONMENT from "../config/environment";
+import ENVIRONMENT from "../config/environment.js";
 
 const token = () => localStorage.getItem("auth_token");
 

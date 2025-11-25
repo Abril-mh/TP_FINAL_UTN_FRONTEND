@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
-import useFetch from "../../hooks/useFetch";
-import { getCategories, createCategory, deleteCategory } from "../../services/CategoryService";
+import useFetch from "../../hooks/useFetch.jsx";
+import { getCategories, createCategory, deleteCategory } from "../../services/CategoryService.js";
 
 const CategoriesScreen = () => {
     const { sendRequest, response, loading } = useFetch();

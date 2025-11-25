@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
-import { getTaskById, updateTask } from "../../services/TaskService";
-import useFetch from "../../hooks/useFetch";
+import { getTaskById, updateTask } from "../../services/TaskService.js";
+import useFetch from "../../hooks/useFetch.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditTaskScreen = () => {

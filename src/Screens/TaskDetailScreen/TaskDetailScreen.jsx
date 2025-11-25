@@ -1,7 +1,7 @@
 
 import { useEffect } from "react";
-import useFetch from "../../hooks/useFetch";
-import { getTaskById } from "../../services/TaskService";
+import useFetch from "../../hooks/useFetch.jsx";
+import { getTaskById } from "../../services/TaskService.js";
 import { useParams } from "react-router-dom";
 
 const TaskDetailScreen = () => {

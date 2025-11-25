@@ -1,4 +1,4 @@
-import ENVIRONMENT from "../config/environment";
+import ENVIRONMENT from "../config/environment.js";
 
 export async function register(name, email, password) {
     const res = await fetch(`${ENVIRONMENT.URL_API}/api/auth/register`, {

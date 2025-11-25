@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import ENVIRONMENT from "../config/environment";
+import ENVIRONMENT from "../config/environment.js";
 
 export const VerificationScreen = () => {
     const { token } = useParams();

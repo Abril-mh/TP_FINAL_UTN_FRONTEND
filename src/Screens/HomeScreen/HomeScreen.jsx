@@ -1,7 +1,7 @@
 
 import { useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
-import { getTasks } from "../../services/TaskService";
+import { getTasks } from "../../services/TaskService.js";
 import "./HomeScreen.css";
 
 const HomeScreen = () => {
