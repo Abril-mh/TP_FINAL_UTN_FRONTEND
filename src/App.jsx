@@ -4,10 +4,10 @@ import RegisterScreen from "./Screens/RegisterScreen/RegisterScreen";
 import HomeScreen from "./Screens/HomeScreen/HomeScreen";
 import AuthMiddleware from "./Middleware/AuthMiddleware";
 import { VerificationScreen } from "./Screens/VerificationScreen";
-import CreateTaskScreen from "./Screens/Task/CreateTaskScreen";
-import EditTaskScreen from "./Screens/Task/EditTaskScreen";
-import TaskDetailScreen from "./Screens/Task/TaskDetailScreen";
-import CategoriesScreen from "./Screens/Category/CategoriesScreen";
+import CreateTaskScreen from "./Screens/CreatetaskScreen/CreateTaskScreen";
+import EditTaskScreen from "./Screens/EditTaskScreen/EditTaskScreen";
+import TaskDetailScreen from "./Screens/TaskDetailScreen/TaskDetailScreen";
+import CategoriesScreen from "./Screens/CategoriesScreen/CategoriesScreen";
 
 function App() {
     return (
