@@ -1,13 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-import LoginScreen from "./Screens/LoginScreen/LoginScreen";
-import RegisterScreen from "./Screens/RegisterScreen/RegisterScreen";
-import HomeScreen from "./Screens/HomeScreen/HomeScreen";
-import AuthMiddleware from "./Middleware/AuthMiddleware";
-import { VerificationScreen } from "./Screens/VerificationScreen";
+import LoginScreen from "./Screens/LoginScreen/LoginScreen.jsx";
+import RegisterScreen from "./Screens/RegisterScreen/RegisterScreen.jsx";
+import HomeScreen from "./Screens/HomeScreen/HomeScreen.jsx";
+import AuthMiddleware from "./Middleware/AuthMiddleware.jsx";
+import { VerificationScreen } from "./Screens/VerificationScreen.jsx";
 import CreateTaskScreen from "./Screens/CreatetaskScreen/CreateTaskScreen.jsx";
-import EditTaskScreen from "./Screens/EditTaskScreen/EditTaskScreen";
-import TaskDetailScreen from "./Screens/TaskDetailScreen/TaskDetailScreen";
-import CategoriesScreen from "./Screens/CategoriesScreen/CategoriesScreen";
+import EditTaskScreen from "./Screens/EditTaskScreen/EditTaskScreen.jsx";
+import TaskDetailScreen from "./Screens/TaskDetailScreen/TaskDetailScreen.jsx";
+import CategoriesScreen from "./Screens/CategoriesScreen/CategoriesScreen.jsx";
 
 function App() {
     return (
