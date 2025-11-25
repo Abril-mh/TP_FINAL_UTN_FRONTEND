@@ -1,6 +1,8 @@
+
 import { useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
 import { getTasks } from "../../services/TaskService";
+import "./HomeScreen.css";
 
 const HomeScreen = () => {
     const { sendRequest, response, loading } = useFetch();
@@ -9,20 +11,28 @@ const HomeScreen = () => {
         sendRequest(() => getTasks());
     }, []);
 
+    const tasks = response?.data?.tasks || [];
+
     return (
-        <div>
-            <h1>Tareas</h1>
-            {loading && <p>Cargando...</p>}
-            {response?.data?.tasks?.map(task => (
-                <div key={task._id}>
-                    <h3>{task.title}</h3>
-                    <p>{task.description}</p>
-                </div>
-            ))}
+        <div className="home-container">
+            <h1 className="home-title">Mis Tareas</h1>
+
+            {loading && <p className="loading">Cargando...</p>}
+
+            {!loading && tasks.length === 0 && (
+                <p className="no-tasks">No tienes tareas aún.</p>
+            )}
+
+            <div className="tasks-list">
+                {tasks.map(task => (
+                    <div className="task-card" key={task._id}>
+                        <h3 className="task-title">{task.title}</h3>
+                        <p className="task-desc">{task.description}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
 
 export default HomeScreen;
-
-

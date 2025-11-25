@@ -8,6 +8,11 @@ import { VerificationScreen } from "./Screens/VerificationScreen";
 function App() {
     return (
         <Routes>
+            <Route path="/home" element={<HomeScreen />} />
+            <Route path="/task/create" element={<CreateTaskScreen />} />
+            <Route path="/task/:id" element={<TaskDetailScreen />} />
+            <Route path="/task/edit/:id" element={<EditTaskScreen />} />
+            <Route path="/categories" element={<CategoriesScreen />} />
             <Route path="/verify_email/:token" element={<VerificationScreen />} />
             <Route path="/" element={<LoginScreen />} />
             <Route path="/login" element={<LoginScreen />} />
