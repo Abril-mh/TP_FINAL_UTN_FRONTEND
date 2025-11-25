@@ -1,10 +1,10 @@
-
 import { useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
 import { getTasks } from "../../services/TaskService.js";
 import "./HomeScreen.css";
 
 const HomeScreen = () => {
+    console.log("CARGANDO EL NUEVO HOMESCREEN");
     const { sendRequest, response, loading } = useFetch();
 
     useEffect(() => {
