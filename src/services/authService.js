@@ -10,11 +10,10 @@ export async function register(name, email, password) {
 }
 
 export async function login(email, password) {
-    const res = await fetch(`${ENVIRONMENT.URL_API}/api/auth/login`, {
+    const res = await fetch(`${ ENVIRONMENT.URL_API } / api / auth / login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
     });
-    return await res.json();
+    return res.json();
 }
-

@@ -9,7 +9,7 @@ const AuthContextProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
     const [isLogged, setIsLogged] = useState(false);
-    const [checking, setChecking] = useState(true); // ⏳ Nuevo: evita bloquear rutas antes de tiempo
+    const [checking, setChecking] = useState(true); //   evita bloquear rutas antes de tiempo
 
     useEffect(() => {
         const token = localStorage.getItem("auth_token");
@@ -36,8 +36,6 @@ const AuthContextProvider = ({ children }) => {
         localStorage.setItem("auth_token", token);
         setUser(decodeToken(token));
         setIsLogged(true);
-
-        navigate("/home", { replace: true });
     }
 
     function onLogout() {

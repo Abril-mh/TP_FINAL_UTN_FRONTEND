@@ -5,7 +5,7 @@ import { AuthContext } from "../Context/AuthContext.jsx";
 const AuthMiddleware = () => {
     const { isLogged, checking } = useContext(AuthContext);
 
-    if (checking) return null; // ⏳ evita navegar antes de tiempo
+    if (checking) return null; //  evita navegar antes de tiempo
 
     return isLogged ? <Outlet /> : <Navigate to="/login" replace />;
 };
