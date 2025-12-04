@@ -62,7 +62,17 @@ const LoginScreen = () => {
                 <button type="submit" disabled={loading}>
                     {loading ? "Entrando..." : "Login"}
                 </button>
+                <p>
+                    ¿No tenés cuenta?{" "}
+                    <button
+                        type="button"
+                        onClick={() => navigate("/register")}
+                        style={{ background: "none", border: "none", color: "blue", cursor: "pointer" }}>
+                        Crear cuenta
+                    </button>
+                </p>
             </form>
+            {response?.message && <p className="success">{response.message}</p>}
         </div>
     );
 };

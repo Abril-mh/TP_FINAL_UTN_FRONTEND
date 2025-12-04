@@ -16,15 +16,17 @@ const RegisterScreen = () => {
         <div>
             <h1>Registro</h1>
             <form onSubmit={handleSubmit}>
-                <input name="name" value={form_state.name} onChange={onInputChange} />
-                <input name="email" value={form_state.email} onChange={onInputChange} />
-                <input name="password" value={form_state.password} onChange={onInputChange} />
+                <input placeholder="name" value={form_state.name} onChange={onInputChange} />
+                <input placeholder="email" value={form_state.email} onChange={onInputChange} />
+                <input placeholder="password" value={form_state.password} onChange={onInputChange} />
                 {error && <p>{error}</p>}
                 {response?.ok && <p>¡Revisa tu mail para verificar la cuenta!</p>}
                 <button disabled={loading}>
                     {loading ? "Registrando..." : "Registrarse"}
                 </button>
             </form>
+            {response?.message && <p className="success">{response.message}</p>}
+            {error && <p className="error">{error}</p>}
         </div>
     );
 };

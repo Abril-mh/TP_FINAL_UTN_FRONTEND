@@ -3,11 +3,16 @@ import { Navigate, Outlet } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext.jsx";
 
 const AuthMiddleware = () => {
-    const { isLogged, checking } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
 
-    if (checking) return null; //  evita navegar antes de tiempo
+    // Mientras carga no renderizamos nada
+    if (loading) return null;
 
-    return isLogged ? <Outlet /> : <Navigate to="/login" replace />;
+    // Si NO hay user lo redirige al login
+    if (!user) return <Navigate to="/login" replace />;
+
+    // Si hay user como que deja entrar a la ruta protegida
+    return <Outlet />;
 };
 
 export default AuthMiddleware;
