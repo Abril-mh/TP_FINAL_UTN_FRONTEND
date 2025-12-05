@@ -16,9 +16,9 @@ const RegisterScreen = () => {
         <div>
             <h1>Registro</h1>
             <form onSubmit={handleSubmit}>
-                <input placeholder="name" value={form_state.name} onChange={onInputChange} />
-                <input placeholder="email" value={form_state.email} onChange={onInputChange} />
-                <input placeholder="password" value={form_state.password} onChange={onInputChange} />
+                <input type="nombre" name= "nombre" placeholder= "nombre" value= {form_state.nombre} onChange={onInputChange} required/>
+                <input type="email" name= "email" placeholder= "email" value= {form_state.email} onChange={onInputChange} required/>
+                <input type="contraseña" name= "contraseña" placeholder= "contraseña" value= {form_state.contraseña} onChange={onInputChange} required/>
                 {error && <p>{error}</p>}
                 {response?.ok && <p>¡Revisa tu mail para verificar la cuenta!</p>}
                 <button disabled={loading}>

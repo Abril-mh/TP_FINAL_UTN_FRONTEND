@@ -30,7 +30,7 @@ const LoginScreen = () => {
     useEffect(() => {
         if (response?.ok) {
             onLogin(response.data.auth_token);
-            navigate("/home"); // 🚀 Redirección
+            navigate("/home"); // Redirección
         }
     }, [response, onLogin, navigate]);
 
