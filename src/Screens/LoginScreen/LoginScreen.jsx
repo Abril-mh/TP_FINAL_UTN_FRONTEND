@@ -23,6 +23,7 @@ const LoginScreen = () => {
     const { form_state, onInputChange, handleSubmit } = useForm(initial, handleLogin);
 
     function handleLogin(form) {
+        console.log("enviando login, porfavorr:", form);
         sendRequest(() => login(form.email, form.password));
     }
 
@@ -39,24 +40,8 @@ const LoginScreen = () => {
             <h1>Login</h1>
 
             <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={form_state.email}
-                    onChange={onInputChange}
-                    required
-                />
-
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Contraseña"
-                    value={form_state.password}
-                    onChange={onInputChange}
-                    required
-                />
-
+                <input type="email" name="email" placeholder="Email" value={form_state.email} onChange={onInputChange} required/>
+                <input type="password"  name="password" placeholder="Contraseña" value={form_state.password} onChange={onInputChange} required/>
                 {error && <p className="error">{error}</p>}
 
                 <button type="submit" disabled={loading}>

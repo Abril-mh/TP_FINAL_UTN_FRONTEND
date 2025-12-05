@@ -12,13 +12,14 @@ const useFetch = () => {
 
         try {
             const data = await requestCallback();
-
+            console.log("respuesta backend, dios:", data);
             if (data.ok === false) {
                 throw new Error(data.message || "Error desconocido");
             }
 
             setResponse(data);
         } catch (err) {
+            console.log("error fetch: ", err)
             setError(err.message);
         } finally {
             setLoading(false);
