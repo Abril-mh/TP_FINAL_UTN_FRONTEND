@@ -13,17 +13,49 @@ const RegisterScreen = () => {
     }
 
     return (
-        <div>
-            <h1>Registro</h1>
+        <div className="form-container">
+            <h1 className="form-title">Registro</h1>
+
             <form onSubmit={handleSubmit}>
-                <input type="text" name="name" placeholder="Nombre" value={form_state.name} onChange={onInputChange} required/>
-                <input type="email" name="email" placeholder="Email" value={form_state.email} onChange={onInputChange} required/>
-                <input type="password" name="password" placeholder="Contraseña" value={form_state.password} onChange={onInputChange} required/>
-                {response?.ok && <p>¡Revisa tu mail para verificar la cuenta!</p>}
-                <button disabled={loading}>
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Nombre"
+                    value={form_state.name}
+                    onChange={onInputChange}
+                    required
+                    className="form-input"
+                />
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={form_state.email}
+                    onChange={onInputChange}
+                    required
+                    className="form-input"
+                />
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Contraseña"
+                    value={form_state.password}
+                    onChange={onInputChange}
+                    required
+                    className="form-input"
+                />
+
+                {response?.ok && (
+                    <p className="success">¡Revisa tu mail para verificar la cuenta!</p>
+                )}
+
+                <button disabled={loading} className="form-button">
                     {loading ? "Registrando..." : "Registrarse"}
                 </button>
             </form>
+
             {response?.message && <p className="success">{response.message}</p>}
             {error && <p className="error">{error}</p>}
         </div>
@@ -31,4 +63,3 @@ const RegisterScreen = () => {
 };
 
 export default RegisterScreen;
-
