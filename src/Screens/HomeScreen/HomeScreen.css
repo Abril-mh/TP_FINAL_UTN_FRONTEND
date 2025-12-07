@@ -22,10 +22,10 @@
 }
 
 .task-card {
-    background: #f5f5f5;
+    background: #c56464;
     padding: 12px 16px;
     border-radius: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid #2b0808;
 }
 
 .task-title {
