@@ -30,9 +30,13 @@ const LoginScreen = () => {
 
     // Al recibir respuesta del backend
     useEffect(() => {
-        if (response?.ok) {
-            onLogin(response.data.auth_token);
+        if (response && response.auth_token) {
+            onLogin(response.auth_token);
             navigate("/home");
+        }
+
+        if (response && response.error) {
+            console.error("Error en login:", response.error);
         }
     }, [response, onLogin, navigate]);
 
