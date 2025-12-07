@@ -31,7 +31,7 @@ const LoginScreen = () => {
     // Al recibir respuesta del backend
     useEffect(() => {
         if (response && response.auth_token) {
-            onLogin(response.token);
+            onLogin(response.auth_token);
             navigate("/home");
         }
 
