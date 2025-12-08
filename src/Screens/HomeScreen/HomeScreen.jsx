@@ -8,12 +8,13 @@ const HomeScreen = () => {
     console.log("CARGANDO EL NUEVO HOMESCREEN");
     const { sendRequest, response, loading } = useFetch();
 
+    // Cuando queramos recargar la lista volvemos a llamar sendRequest con getTasks
     useEffect(() => {
         sendRequest(() => getTasks());
-    }, []);
+    }, [sendRequest]);
 
-    // Manejo robusto de posibles formas de respuesta del backend
-    // intenta estos por si devuelven el array directo
+    // --- Manejo robusto de posibles formas de respuesta del backend ---
+    // intenta: response.tasks, response.data.tasks, response.data, o response (por si devuelven el array directo)
     const tasks =
         response?.tasks ||
         response?.data?.tasks ||
@@ -21,7 +22,7 @@ const HomeScreen = () => {
         response ||
         [];
 
-    // Función para eliminar y recargar 
+    // --- Función para eliminar y recargar ---
     const handleDelete = async (id) => {
         // 1) borrar
         await sendRequest(() => deleteTask(id));
