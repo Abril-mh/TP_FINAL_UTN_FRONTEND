@@ -5,16 +5,14 @@ import { getTasks, deleteTask } from "../../services/TaskService.js";
 import "./HomeScreen.css";
 
 const HomeScreen = () => {
-    console.log("CARGANDO EL NUEVO HOMESCREEN");
+    console.log("CARGANDO EL HOMESCREEN");
     const { sendRequest, response, loading } = useFetch();
 
-    // Cuando queramos recargar la lista volvemos a llamar sendRequest con getTasks
     useEffect(() => {
         sendRequest(() => getTasks());
-    }, [sendRequest]);
+    }, []);
 
-    // --- Manejo robusto de posibles formas de respuesta del backend ---
-    // intenta: response.tasks, response.data.tasks, response.data, o response (por si devuelven el array directo)
+    // Tu manejo robusto (lo dejamos igual)
     const tasks =
         response?.tasks ||
         response?.data?.tasks ||
@@ -22,26 +20,27 @@ const HomeScreen = () => {
         response ||
         [];
 
-    // --- Función para eliminar y recargar ---
+    //  ⭐ ARREGLO: eliminar sin crear bucle ni doble carga
     const handleDelete = async (id) => {
-        // 1) borrar
         await sendRequest(() => deleteTask(id));
-        // 2) recargar la lista (aseguramos que la vista se actualice)
-        await sendRequest(() => getTasks());
+        // importante: UNA SOLA llamada para recargar
+        sendRequest(() => getTasks());
     };
 
     return (
         <div className="home-container">
             <h1 className="home-title">Mis Tareas</h1>
 
-            {/* BOTÓN CREAR: va arriba de la lista */}
             <div style={{ marginBottom: 16 }}>
                 <Link to="/create-task" className="btn-create">
                     + Crear nueva tarea
                 </Link>
             </div>
 
-            {loading && <p className="loading">Cargando...</p>}
+            {/* ⭐ ARREGLO: solo mostrar cargando si NO hay datos aún */}
+            {loading && tasks.length === 0 && (
+                <p className="loading">Cargando...</p>
+            )}
 
             {!loading && tasks.length === 0 && (
                 <p className="no-tasks">No tienes tareas aún.</p>
@@ -53,7 +52,6 @@ const HomeScreen = () => {
                         <h3 className="task-title">{task.title}</h3>
                         <p className="task-desc">{task.description}</p>
 
-                        {/* BOTONES EDITAR + ELIMINAR: dentro de cada card */}
                         <div className="task-actions">
                             <Link to={`/edit-task/${task._id || task.id}`} className="btn-edit">
                                 Editar
