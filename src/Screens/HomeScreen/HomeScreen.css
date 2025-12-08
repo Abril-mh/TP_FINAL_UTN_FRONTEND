@@ -14,12 +14,14 @@
 /* Input + botón de crear tarea */
 .add-task-form {
     display: flex;
-    gap: 10px;
+    justify-content: center;   /* Centra horizontalmente */
+    align-items: center;        /* Alinea verticalmente */
+    gap: 10px;                  /* Espaciado entre input y botón */
     margin-bottom: 20px;
 }
 
 .add-task-input {
-    flex: 1;
+    width: 70%;                 /* Mantiene el tamaño correcto */
     padding: 10px;
     border-radius: 6px;
     border: 1px solid #aaa;
