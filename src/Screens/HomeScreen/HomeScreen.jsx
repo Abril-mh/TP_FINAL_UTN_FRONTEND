@@ -22,7 +22,7 @@ const HomeScreen = () => {
         response ||
         [];
 
-    // Agregar tarea desde Home
+    // Agregar tarea
     const handleAddTask = async (e) => {
         e.preventDefault();
         if (!newTask.trim()) return;
@@ -31,8 +31,8 @@ const HomeScreen = () => {
             createTask({ title: newTask, description: "" })
         );
 
-        setNewTask(""); // limpiar input
-        await sendRequest(() => getTasks()); // recargar lista
+        setNewTask("");
+        await sendRequest(() => getTasks());
     };
 
     // Eliminar tarea
@@ -47,24 +47,30 @@ const HomeScreen = () => {
         setEditForm({ title: task.title, description: task.description });
     };
 
-    // Cambiar valores del formulario de edición
+    // Cambiar valores de edición
     const handleEditChange = (e) => {
         setEditForm({ ...editForm, [e.target.name]: e.target.value });
     };
 
     // Guardar cambios
     const saveEdit = async (id) => {
-        console.log("datos que envio al backend lpm: ", editForm);
-        await sendRequest(() => updateTask(id, editForm));
-        setEditingTaskId(null);
-        await sendRequest(() => getTasks()); // recargar lista con cambios
+        try {
+            // Solo enviamos los campos que espera el backend
+            const payload = { title: editForm.title, description: editForm.description };
+            console.log("Enviando al backend:", payload); // para depuración
+            await sendRequest(() => updateTask(id, payload));
+            setEditingTaskId(null);
+            await sendRequest(() => getTasks());
+        } catch (error) {
+            console.error("Error guardando la tarea:", error);
+        }
     };
 
     return (
         <div className="home-container">
             <h1 className="home-title">Mis Tareas</h1>
 
-            {/* FORM para agregar tarea */}
+            {/* Form para agregar tarea */}
             <form className="add-task-form" onSubmit={handleAddTask}>
                 <input
                     className="add-task-input"
