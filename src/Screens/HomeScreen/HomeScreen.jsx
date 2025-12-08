@@ -57,7 +57,8 @@ const HomeScreen = () => {
         try {
             // Solo enviamos los campos que espera el backend
             const payload = { title: editForm.title, description: editForm.description };
-            console.log("Enviando al backend:", payload); // para depuración
+            console.log("paylod enviado:", payload); // para depuración
+            console.log("ID enviado:", id);
             await sendRequest(() => updateTask(id, payload));
             setEditingTaskId(null);
             await sendRequest(() => getTasks());
