@@ -24,7 +24,7 @@ const HomeScreen = () => {
         if (!newTask.trim()) return;
 
         await sendRequest(() =>
-            createTask({ title: newTask, description: "", category: categories [0]?._id })
+            createTask({ title: newTask, description: "" })
         );
 
         setNewTask(""); // limpias el input
