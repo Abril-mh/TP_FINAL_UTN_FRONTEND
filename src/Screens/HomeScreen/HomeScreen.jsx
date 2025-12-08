@@ -54,6 +54,7 @@ const HomeScreen = () => {
 
     // Guardar cambios
     const saveEdit = async (id) => {
+        console.log("datos que envio al backend lpm: ", editForm);
         await sendRequest(() => updateTask(id, editForm));
         setEditingTaskId(null);
         await sendRequest(() => getTasks()); // recargar lista con cambios

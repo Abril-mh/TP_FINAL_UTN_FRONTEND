@@ -29,15 +29,15 @@ return res.json();
 }
 
 export async function updateTask(id, data) {
-    const res = await fetch(`${ ENVIRONMENT.URL_API }/api/tasks/${ id }`, {
+    const res = await fetch(`${ENVIRONMENT.URL_API}/api/tasks/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${ token() }`
+            Authorization: `Bearer ${token()}`
         },
-body: JSON.stringify(data)
+        body: JSON.stringify(data)
     });
-return res.json();
+    return res.json();
 }
 
 export async function deleteTask(id) {
