@@ -8,18 +8,18 @@ const useFetch = () => {
     async function sendRequest(requestCallback) {
         setLoading(true);
         setError(null);
+        setResponse(null);
 
         try {
             const data = await requestCallback();
-            console.log("respuesta backend, porfavor:", data);
-
+            console.log("respuesta backend, dios:", data);
             if (data.ok === false) {
-                throw new Error(data.message || "Error desconocido, oh no");
+                throw new Error(data.message || "Error desconocido");
             }
 
             setResponse(data);
         } catch (err) {
-            console.log("error fetch: ", err);
+            console.log("error fetch: ", err)
             setError(err.message);
         } finally {
             setLoading(false);
