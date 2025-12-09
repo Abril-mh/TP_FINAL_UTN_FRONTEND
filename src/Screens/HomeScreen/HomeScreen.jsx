@@ -98,12 +98,14 @@ const HomeScreen = () => {
                             <>
                                 <input
                                     name="title"
+                                    placeholder="titulo"
                                     value={editForm.title}
                                     onChange={handleEditChange}
                                     className="edit-input"
                                 />
                                 <textarea
                                     name="description"
+                                    placeholder="descripcion de la tarea"
                                     value={editForm.description}
                                     onChange={handleEditChange}
                                     className="edit-textarea"
