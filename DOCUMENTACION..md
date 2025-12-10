@@ -1,153 +1,177 @@
-📘 DOCUMENTACIÓN_TÉCNICA.md — TP FINAL UTN (Frontend)
+# 📘 **DOCUMENTACIÓN_TÉCNICA.md**
 
-📘 Documentación Técnica del Frontend
-
+📘 Documentación Técnica del Frontend  
+Aplicación desarrollada en React + Vite para la gestión de tareas con autenticación por JWT.
 
 ---
 
-1️⃣ Arquitectura General
+# 1️⃣ Arquitectura General
 
 La aplicación implementa una arquitectura basada en:
 
-React + Vite
+- React + Vite  
+- Servicios desacoplados  
+- Estado global con Context API  
+- Custom Hooks reutilizables  
+- Middleware para rutas protegidas  
+- Pantallas modulares  
+- Capa de configuración para URL del backend  
 
-Servicios desacoplados
-
-Estado global con Context API
-
-Custom Hooks reutilizables
-
-Middleware para rutas protegidas
-
-Pantallas modulares
-
-
+La estructura permite separar responsabilidades y mantener un código mantenible y escalable.
 
 ---
 
-2️⃣ Flujo de Autenticación (diagrama)
+# 2️⃣ Flujo de Autenticación (diagrama)
 
-[ LoginScreen ] -- envia email/pass --> [ authService.login ]
-       ↓
-[ Backend responde token JWT ]
-       ↓
-[ AuthContext.onLogin ]
-       ↓
-- Guarda token
-- Decodifica usuario
-- Cambia estado global
-       ↓
-Redirige a /home
+[ LoginScreen ] --- email/pass ---> [ authService.login ] ↓ [ Backend responde token JWT ] ↓ [ AuthContext.onLogin ] ↓
 
+Guarda token en localStorage
+
+Decodifica usuario con react-jwt
+
+Cambia estado global ↓ Redirige a /home
+
+
+Si el usuario no verificó email:  
+→ Se informa en pantalla  
+→ No puede ingresar a rutas protegidas  
 
 ---
 
-3️⃣ Config – environment.js
+# 3️⃣ Config – environment.js
 
-Define la URL base del backend:
+Archivo: `src/config/environment.js`
 
+```js
 const ENVIRONMENT = {
   URL_API: import.meta.env.VITE_APP_API_URL
 };
 
 export default ENVIRONMENT;
 
+Permite cambiar entre local, testing y producción simplemente modificando .env.
+
 
 ---
 
 4️⃣ AuthContext.jsx — Manejo de Autenticación Global
 
-Funciones clave:
+Este contexto controla toda la sesión del usuario.
 
-✔️ Cargar usuario desde token
+Funciones principales:
 
-✔️ Validar token al iniciar
+✔ Cargar usuario desde token
+✔ Validar y decodificar JWT
+✔ Redirigir después de login/logout
+✔ Exponer estado global a todas las pantallas
 
-✔️ Redirigir después de login/logout
-
-✔️ Exponer estado global
-
-Estados:
+Estados expuestos:
 
 user
 
 isLogged
 
-checking (evita saltos de pantalla)
+checking
 
-onLogin()
+onLogin(token)
 
 onLogout()
 
+
+Si el token expira → se elimina automáticamente.
 
 
 ---
 
 5️⃣ AuthMiddleware.jsx — Protección de rutas
 
-return isLogged ? <Outlet /> : <Navigate to="/login" replace />;
+Evita que usuarios no autenticados entren a:
 
-Evita entrar a rutas privadas sin sesión.
+/home
+
+/create-task
+
+/edit-task/:id
+
+/categories
+
+
+Funciona así:
+
+return isLogged ? <Outlet /> : <Navigate to="/login" replace />;
 
 
 ---
 
 6️⃣ Custom Hook: useFetch
 
-Encapsula TODA petición al backend.
+Hook centralizado para peticiones HTTP.
 
-Funciones internas:
+Controla:
 
 Estado	Uso
 
-response	respuesta del backend
-loading	Booleano de carga
-error	mensajes de error
+response	Respuesta del backend
+loading	Estado de carga
+error	Mensajes de error
 
 
 Método principal:
 
-async function sendRequest(requestCallback)
+execute(() => taskService.getTasks());
 
-Permite:
+Implementa:
 
-sendRequest(() => getTasks())
+manejo automático de errores
+
+loading global
+
+compatibilidad con servicios reutilizables
+
 
 
 ---
 
 7️⃣ Custom Hook: useForm
 
-Estandariza formularios:
+Simplifica el manejo de formularios:
+
+Control de inputs
 
 Estado del formulario
 
-Manejador de cambios
+Reset
 
 onSubmit reutilizable
 
-Reset automático opcional
 
+Ideal para Login y Register.
 
-Ideal porque evita código repetido en Register/Login.
+Ejemplo:
+
+const { form, handleChange, handleSubmit } = useForm({
+  email: "",
+  password: ""
+});
 
 
 ---
 
 8️⃣ Screens
 
+A continuación el detalle de cada pantalla:
+
 
 ---
 
 🔵 VerificationScreen.jsx
 
-Valida token de email enviado al correo.
-
+Valida el token enviado al correo.
 Llama a:
 
-GET /api/auth/verify?token=
+GET /auth/verify?token=
 
-Si OK → redirect a login.
+Si es correcto → muestra mensaje y redirige al login.
 
 
 ---
@@ -156,23 +180,25 @@ Si OK → redirect a login.
 
 Usa:
 
-useFetch
-
 useForm
+
+useFetch
 
 AuthContext
 
 
-Cuando backend responde token:
+Cuando el backend responde:
 
 onLogin(response.data.auth_token);
+
+Si el usuario no está verificado → muestra advertencia.
 
 
 ---
 
 🔵 RegisterScreen.jsx
 
-Envía:
+Datos enviados:
 
 name
 
@@ -181,43 +207,56 @@ email
 password
 
 
-Luego backend envía correo de verificación.
+Al registrarse → backend envía email de verificación.
 
 
 ---
 
 🔵 HomeScreen.jsx
 
-Carga tareas con:
+Carga tareas usando:
 
-sendRequest(() => getTasks());
+execute(() => taskService.getTasks());
 
-Renderiza tarjetas:
+Renderiza:
 
-task.title
-task.description
+título
+
+descripción
+
+categoría
+
+editar
+
+eliminar
+
 
 
 ---
 
-🔵 CreateTaskScreen
+🔵 CreateTaskScreen.jsx
 
-Formulario simple → POST al backend.
+Formulario para crear una tarea.
+Usa:
+
+taskService.createTask(form)
 
 
 ---
 
-🔵 EditTaskScreen
+🔵 EditTaskScreen.jsx
 
-1. Trae datos con getTaskById
-
-
-2. Rellena el formulario existente
+1. Carga la tarea por ID
 
 
-3. Envía updateTask
+2. Rellena formulario existente
 
 
+3. Envía update con:
+
+
+
+taskService.updateTask(id, form)
 
 
 ---
@@ -226,29 +265,30 @@ Formulario simple → POST al backend.
 
 Permite:
 
-Crear categorías
+✔ Crear categorías
+✔ Mostrar lista
+✔ Eliminar categorías
 
-Listarlas
-
-Eliminarlas
-
+Usa categoryService.
 
 
 ---
 
-9️⃣ Servicios (services)
+9️⃣ Servicios
 
-Cada servicio devuelve una función lista para usar en useFetch.
+Los servicios devuelven funciones para ser usadas dentro de useFetch.
 
 Ejemplo:
 
 export function getTasks() {
-  return api.get("/api/tasks");
+  return api.get("/tasks");
 }
 
-Permite:
+Uso:
 
-sendRequest(() => getTasks());
+execute(() => getTasks());
+
+Esto mantiene el código desacoplado y limpio.
 
 
 ---
@@ -259,7 +299,7 @@ Código DRY
 
 Separación lógica por capas
 
-Middleware propio
+Middleware propio para rutas
 
 Hooks reutilizables
 
@@ -267,20 +307,7 @@ Servicios desacoplados
 
 Navegación clara
 
+Validación global de autenticación
 
-
----
-
-📌 Este documento es APTO PARA ENTREGA en UTN
-
-Cumple:
-
-✔ Arquitectura clara
-✔ Documentación técnica formal
-✔ Explicación de flujo de negocio
-✔ Estructura del proyecto
-✔ Justificación técnica
-✔ Diagramas
-✔ Descripción de funciones
-
+Componentes simples y modulares
 
