@@ -1,6 +1,7 @@
 import useForm from "../../hooks/useForm.jsx";
 import useFetch from "../../hooks/useFetch.jsx";
 import { register } from "../../services/authService.js";
+import "./RegisterScreen.css"
 
 const RegisterScreen = () => {
     const initial = { name: "", email: "", password: "" };
