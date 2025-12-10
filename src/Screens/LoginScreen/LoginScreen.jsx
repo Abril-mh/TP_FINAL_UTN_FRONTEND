@@ -40,59 +40,59 @@ const LoginScreen = () => {
         }
     }, [response, onLogin, navigate]);
 
-return (
-    <div className="login-page">
-        <div className="login-container">
-            <h1 className="form-title">Login</h1>
+    return (
+        <div className="login-page">
+            <div className="login-container">
+                <h1 className="form-title">Login</h1>
 
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={form_state.email}
-                    onChange={onInputChange}
-                    required
-                    className="form-input"
-                />
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        value={form_state.email}
+                        onChange={onInputChange}
+                        required
+                        className="form-input"
+                    />
 
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Contraseña"
-                    value={form_state.password}
-                    onChange={onInputChange}
-                    required
-                    className="form-input"
-                />
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Contraseña"
+                        value={form_state.password}
+                        onChange={onInputChange}
+                        required
+                        className="form-input"
+                    />
 
-                {error && <p className="error">{error}</p>}
+                    {error && <p className="error">{error}</p>}
 
-                <button type="submit" disabled={loading} className="form-button">
-                    {loading ? "Entrando..." : "Login"}
-                </button>
-
-                <p className="form-link">
-                    ¿No tenés cuenta?
-                    <button
-                        type="button"
-                        onClick={() => navigate("/register")}
-                        style={{
-                            background: "none",
-                            border: "none",
-                            color: "blue",
-                            cursor: "pointer",
-                        }}
-                    >
-                        Crear cuenta
+                    <button type="submit" disabled={loading} className="form-button">
+                        {loading ? "Entrando..." : "Login"}
                     </button>
-                </p>
-            </form>
 
-            {response?.message && <p className="success">{response.message}</p>}
+                    <p className="form-link">
+                        ¿No tenés cuenta?
+                        <button
+                            type="button"
+                            onClick={() => navigate("/register")}
+                            style={{
+                                background: "none",
+                                border: "none",
+                                color: "blue",
+                                cursor: "pointer",
+                            }}
+                        >
+                            Crear cuenta
+                        </button>
+                    </p>
+                </form>
+
+                {response?.message && <p className="success">{response.message}</p>}
+            </div>
         </div>
-    </div>
-);
+    );
 };
 
 export default LoginScreen;
