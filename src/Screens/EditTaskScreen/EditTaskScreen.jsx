@@ -59,7 +59,7 @@ const EditTaskScreen = () => {
                 }}
             >
 
-                {/* SOLO UN INPUT — NO SE CREA BARRA NUEVA */}
+                
                 <input
                     type="text"
                     name="title"

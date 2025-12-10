@@ -1,12 +1,23 @@
+body {
+    background-image: url("https://e0.pxfuel.com/wallpapers/219/951/desktop-wallpaper-grumpy-cat-meme-for-your-mobile-tablet-explore-cat-computer-full-3d-angry-cat.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
 /* Contenedor general */
 .home-container {
     max-width: 600px;
     margin: 40px auto;
     padding: 20px;
-    border: 11px solid #605de7;
+    border: 16px solid #605de7;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.80);
+    backdrop-filter: blur(2px);
 }
 
-/* Título */
+
+/* El Título */
 .home-title {
     text-align: center;
     margin-bottom: 20px;
@@ -15,14 +26,14 @@
 /* Input + botón de crear tarea */
 .add-task-form {
     display: flex;
-    justify-content: center;   /* Centra horizontalmente */
-    align-items: center;        /* Alinea verticalmente */
-    gap: 10px;                  /* Espaciado entre input y botón */
+    justify-content: center;   
+    align-items: center;        
+    gap: 10px;                 
     margin-bottom: 20px;
 }
 
 .add-task-input {
-    width: 70%;                 /* Mantiene el tamaño correcto */
+    width: 70%;                 
     padding: 10px;
     border-radius: 6px;
     border: 1px solid #aaa;
@@ -56,10 +67,11 @@
 /* Tarjeta */
 .task-card {
     background: #444394;
-    padding: 12px 16px;
+    padding: 20px;
     border-radius: 8px;
     border: 1px solid #2b0808;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1)
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    box-sizing: border-box;
 }
 
 .task-title {
@@ -105,9 +117,7 @@
     cursor: pointer;
 }
 
-/* ------------------------------ */
-/*   ESTILOS PARA MODO EDICIÓN   */
-/* ------------------------------ */
+/* ESTILO PARA MODO EDICION JIJI */
 
 .edit-input,
 .edit-textarea {
