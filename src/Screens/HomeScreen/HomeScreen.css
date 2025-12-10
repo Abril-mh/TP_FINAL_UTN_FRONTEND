@@ -1,11 +1,12 @@
-body {
+/* Contenedor general */
+.home-page {
+    min-height: 100vh;
     background-image: url("https://e0.pxfuel.com/wallpapers/219/951/desktop-wallpaper-grumpy-cat-meme-for-your-mobile-tablet-explore-cat-computer-full-3d-angry-cat.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 
-/* Contenedor general */
 .home-container {
     max-width: 600px;
     margin: 40px auto;

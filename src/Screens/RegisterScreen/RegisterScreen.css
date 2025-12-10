@@ -1,10 +1,14 @@
 /* ======= ESTILO BASE ======= */
 
-body {
+.register-page {
     background-image: url("https://es.wp-s.ru/wallpapers/5/19/476749502697058/el-gato-del-meme-gato-gru-n-en-el-fondo-del-amanecer.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .form-container,

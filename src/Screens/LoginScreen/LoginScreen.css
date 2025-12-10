@@ -1,10 +1,13 @@
 /* tiburoncin ujaja */
-
-body {
+.login-page {
     background-image: url("https://wallpapers.com/images/hd/cartoon-ceiling-cat-meme-czq2w2baktwxf1gw.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .form-container,

@@ -12,7 +12,8 @@ const RegisterScreen = () => {
         sendRequest(() => register(form.name, form.email, form.password));
     }
 
-    return (
+return (
+    <div className="register-page">
         <div className="form-container">
             <h1 className="form-title">Registro</h1>
 
@@ -59,7 +60,8 @@ const RegisterScreen = () => {
             {response?.message && <p className="success">{response.message}</p>}
             {error && <p className="error">{error}</p>}
         </div>
-    );
+    </div>
+);
 };
 
 export default RegisterScreen;
